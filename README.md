@@ -71,114 +71,108 @@ The same security test suite can be used to evaluate different AI models and com
 
 
 ```text
+                      AI Security Tester
 
-&#x20;                        AI Security Tester
+                              │
+                              ▼
+                      ┌─────────────────┐
 
-&#x20;                               │
+                      │     FastAPI     │
+                      │   REST Backend  │
 
-&#x20;                               ▼
+                      └────────┬────────┘
 
-&#x20;                      ┌─────────────────┐
+                               │
 
-&#x20;                      │     FastAPI     │
+                               ▼
 
-&#x20;                      │   REST Backend  │
+                      ┌─────────────────┐
 
-&#x20;                      └────────┬────────┘
+                      │ Security Engine │
 
-&#x20;                               │
+                      └────────┬────────┘
 
-&#x20;                               ▼
+                               │
 
-&#x20;                      ┌─────────────────┐
+                               ▼
 
-&#x20;                      │ Security Engine │
+                      ┌─────────────────┐
 
-&#x20;                      └────────┬────────┘
+                      │Security Campaign│
 
-&#x20;                               │
+                      └────────┬────────┘
 
-&#x20;                               ▼
+                               │
 
-&#x20;                      ┌─────────────────┐
+                               ▼
 
-&#x20;                      │Security Campaign│
+                      ┌─────────────────┐
 
-&#x20;                      └────────┬────────┘
+                      │ Attack Registry │
 
-&#x20;                               │
+                      └────────┬────────┘
 
-&#x20;                               ▼
+                               │
 
-&#x20;                      ┌─────────────────┐
+                               ▼
 
-&#x20;                      │ Attack Registry │
+                      ┌─────────────────┐
 
-&#x20;                      └────────┬────────┘
+                      │  Attack Runner  │
 
-&#x20;                               │
+                      └────────┬────────┘
 
-&#x20;                               ▼
+                               │
 
-&#x20;                      ┌─────────────────┐
+                               ▼
 
-&#x20;                      │  Attack Runner  │
+                      ┌─────────────────┐
 
-&#x20;                      └────────┬────────┘
+                      │  Model Service  │
 
-&#x20;                               │
+                      │    Provider     │
 
-&#x20;                               ▼
+                      │   Abstraction   │
 
-&#x20;                      ┌─────────────────┐
+                      └────────┬────────┘
 
-&#x20;                      │  Model Service  │
+                               │
 
-&#x20;                      │    Provider     │
+                 ┌─────────────┴─────────────┐
 
-&#x20;                      │   Abstraction   │
+                 │                           │
 
-&#x20;                      └────────┬────────┘
+                 ▼                           ▼
 
-&#x20;                               │
+          Local AI Model              Non-Local AI
 
-&#x20;                 ┌─────────────┴─────────────┐
+             Ollama                  API Provider
 
-&#x20;                 │                           │
+                 │                           │
 
-&#x20;                 ▼                           ▼
+                 └─────────────┬─────────────┘
 
-&#x20;          Local AI Model              Non-Local AI
+                               │
 
-&#x20;             Ollama                  API Provider
+                               ▼
+                      ┌─────────────────┐
 
-&#x20;                 │                           │
+                      │    Evaluator    │
 
-&#x20;                 └─────────────┬─────────────┘
+                      └────────┬────────┘
 
-&#x20;                               │
+                               │
 
-&#x20;                               ▼
+                               ▼
 
-&#x20;                      ┌─────────────────┐
+                      ┌─────────────────┐
 
-&#x20;                      │    Evaluator    │
+                      │ Results / Score │
 
-&#x20;                      └────────┬────────┘
+                      │ / Risk Analysis │
 
-&#x20;                               │
+                      └─────────────────┘
 
-&#x20;                               ▼
-
-&#x20;                      ┌─────────────────┐
-
-&#x20;                      │ Results / Score │
-
-&#x20;                      │ / Risk Analysis │
-
-&#x20;                      └─────────────────┘
-
-```
 
 
 
@@ -424,11 +418,11 @@ The currently validated local configuration uses:
 
 Ollama
 
-&#x20;   ↓
+   ↓
 
 qwen3.5:4b
 
-&#x20;   ↓
+   ↓
 
 AI Security Tester
 
@@ -518,15 +512,13 @@ Run:
 
 ```powershell
 
-Invoke-RestMethod `
+Invoke-RestMethod `  -Uri "http://localhost:11434/api/generate" `
 
-&#x20;   -Uri "http://localhost:11434/api/generate" `
+   -Method Post `
 
-&#x20;   -Method Post `
+   -ContentType "application/json" `
 
-&#x20;   -ContentType "application/json" `
-
-&#x20;   -Body '{"model":"qwen3.5:4b","prompt":"Reply with exactly: OLLAMA-TEST-OK","stream":false}'
+   -Body '{"model":"qwen3.5:4b","prompt":"Reply with exactly: OLLAMA-TEST-OK","stream":false}'
 
 ```
 
@@ -620,11 +612,11 @@ Expected response:
 
 {
 
-&#x20; "status": "ok",
+ "status": "ok",
 
-&#x20; "service": "AI Security Tester",
+ "service": "AI Security Tester",
 
-&#x20; "version": "0.1.0"
+ "version": "0.1.0"
 
 }
 
@@ -684,11 +676,11 @@ Use:
 
 {
 
-&#x20; "provider": "ollama",
+ "provider": "ollama",
 
-&#x20; "model": "qwen3.5:4b",
+ "model": "qwen3.5:4b",
 
-&#x20; "prompt": "Reply with exactly: API-TEST-OK"
+ "prompt": "Reply with exactly: API-TEST-OK"
 
 }
 
@@ -716,19 +708,19 @@ This verifies:
 
 FastAPI
 
-&#x20;  ↓
+  ↓
 
 ModelService
 
-&#x20;  ↓
+  ↓
 
 OllamaProvider
 
-&#x20;  ↓
+  ↓
 
 Ollama
 
-&#x20;  ↓
+  ↓
 
 qwen3.5:4b
 
@@ -764,11 +756,11 @@ Example:
 
 {
 
-&#x20; "test": "baseline",
+ "test": "baseline",
 
-&#x20; "provider": "ollama",
+ "provider": "ollama",
 
-&#x20; "model": "qwen3.5:4b"
+ "model": "qwen3.5:4b"
 
 }
 
@@ -808,11 +800,11 @@ Example:
 
 {
 
-&#x20; "attack": "basic\_jailbreak",
+ "attack": "basic\_jailbreak",
 
-&#x20; "provider": "ollama",
+ "provider": "ollama",
 
-&#x20; "model": "qwen3.5:4b"
+ "model": "qwen3.5:4b"
 
 }
 
@@ -872,41 +864,41 @@ Request:
 
 {
 
-&#x20; "attacks": \[
+ "attacks": \[
 
-&#x20;   "basic\_jailbreak",
+   "basic\_jailbreak",
 
-&#x20;   "basic\_prompt\_injection",
+   "basic\_prompt\_injection",
 
-&#x20;   "basic\_system\_prompt\_leakage",
+   "basic\_system\_prompt\_leakage",
 
-&#x20;   "basic\_safety",
+   "basic\_safety",
 
-&#x20;   "basic\_robustness",
+   "basic\_robustness",
 
-&#x20;   "basic\_encoding\_obfuscation",
+   "basic\_encoding\_obfuscation",
 
-&#x20;   "basic\_instruction\_hierarchy",
+   "basic\_instruction\_hierarchy",
 
-&#x20;   "basic\_context\_manipulation",
+   "basic\_context\_manipulation",
 
-&#x20;   "basic\_sensitive\_information\_disclosure",
+   "basic\_sensitive\_information\_disclosure",
 
-&#x20;   "basic\_multi\_turn\_consistency",
+   "basic\_multi\_turn\_consistency",
 
-&#x20;   "basic\_indirect\_prompt\_injection",
+   "basic\_indirect\_prompt\_injection",
 
-&#x20;   "basic\_rag\_security",
+   "basic\_rag\_security",
 
-&#x20;   "basic\_agent\_tool\_authorization",
+   "basic\_agent\_tool\_authorization",
 
-&#x20;   "basic\_excessive\_agency"
+   "basic\_excessive\_agency"
 
-&#x20; ],
+ ],
 
-&#x20; "provider": "ollama",
+ "provider": "ollama",
 
-&#x20; "model": "qwen3.5:4b"
+ "model": "qwen3.5:4b"
 
 }
 
