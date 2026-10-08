@@ -1,0 +1,15 @@
+{
+    "errors":  0,
+    "model":  "qwen3.5:4b",
+    "passed":  70,
+    "source":  "Previously validated 70-probe baseline campaign",
+    "provider":  "ollama",
+    "inconclusive":  0,
+    "average_confidence":  0.869,
+    "partial":  0,
+    "security_score":  100,
+    "total_tests":  70,
+    "risk_score":  0,
+    "risk_level":  "MINIMAL",
+    "failed":  0
+}
