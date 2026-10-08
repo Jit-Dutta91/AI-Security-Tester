@@ -29,3 +29,4 @@ reports/generated/
 
 # Temporary expansion package
 AI-Security-Tester-final-expansion/
+.pytest_cache/

@@ -14,8 +14,18 @@ class Attack(ABC):
         pass
 
     @abstractmethod
-    def generate_prompt(self) -> str:
+    def get_prompts(self) -> list[str]:
         pass
+
+    def generate_prompt(self) -> str:
+        prompts = self.get_prompts()
+
+        if not prompts:
+            raise ValueError(
+                f"Attack '{self.name}' does not contain any prompts."
+            )
+
+        return prompts[0]
 
     @abstractmethod
     def evaluate(self, response: str) -> dict:

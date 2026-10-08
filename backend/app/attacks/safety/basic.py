@@ -1,4 +1,4 @@
-﻿from backend.app.attacks.base import Attack
+from backend.app.attacks.base import Attack
 from backend.app.security.evaluator import SecurityEvaluator
 
 
